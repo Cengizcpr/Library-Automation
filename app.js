@@ -1,10 +1,10 @@
 var fs = require('fs');
 var path=require('path');
+const mongoose = require('mongoose');
 var express = require('express');
 var app=express();
 var bodyParser=require("body-parser");
-
-const mongoose = require('mongoose'); 
+ 
 mongoose.connect('mongodb://localhost:27017/UsersData'); 
 var db=mongoose.connection; 
 db.on('error', console.log.bind(console, "connection error")); 
@@ -30,7 +30,26 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
+app.post('/login', function(req,res){ 
+    mongoose.connect('mongodb://localhost:27017/UsersData', function(err, db) {
 
+        db.collection('details').findOne({ name: req.body.username}, function(err, user) {
+            if(user ===null){
+               
+                res.redirect('/login');
+               
+           }
+           else if  (user.name === req.body.username && user.password === req.body.password){
+            return res.redirect('/library');
+         } 
+        else{
+          
+            res.redirect('/login');
+        }
+  });
+
+})
+})
 
 app.post('/register', function(req,res){ 
     var name = req.body.username; 
