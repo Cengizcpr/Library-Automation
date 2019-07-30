@@ -4,9 +4,6 @@ var router=express.Router();
 module.exports.index=function(req,res){
     res.sendFile(path.join(__dirname,'../../Library.html'));
 }
-module.exports.searchbook=function(req,res){
-    res.sendFile(path.join(__dirname,'../../Searchbook.html'));
-}
 module.exports.givebook=function(req,res){
     res.sendFile(path.join(__dirname,'../../Givebook.html'));
 }
