@@ -58,11 +58,11 @@
 
     <div3  class="bottom-position">
     <form action="/addbook" method="post">
-        <p><b>Book Name: <input type="text" name="book_name"size="60" placeholder="This field is requid"/></b></p><br/>
-        <p><b>Author:   &emsp;&emsp;&nbsp;<input type="text" name="author" size="60" placeholder="This field is requied" maxlength="60"/></b></p><br/>
-        <p><b>ISBN:&emsp;&emsp;&nbsp;&nbsp;&nbsp; <input type="text" name="isbn" size="60" placeholder="This field is requied" maxlength="13"/></b></p><br/>
-        <p><b>Publisher: <input type="text" name="publisher" size="60" placeholder="This field is requied" maxlength="60"/></b></p><br/>
-        <p><b>Catehory: <select name="category">
+        <p><b>Book Name: <input type="text" name="book_name"size="60" placeholder="This field is requid" required /></b></p><br/>
+        <p><b>Author:   &emsp;&emsp;&nbsp;<input type="text" name="author" size="60" placeholder="This field is requied" required maxlength="60" /></b></p><br/>
+        <p><b>ISBN:&emsp;&emsp;&nbsp;&nbsp;&nbsp; <input type="text" name="isbn" size="60" placeholder="This field is requied" required maxlength="13"/></b></p><br/>
+        <p><b>Publisher: <input type="text" name="publisher" size="60" placeholder="This field is requied" required maxlength="60" /></b></p><br/>
+        <p><b>Catehory: <select name="category" required>
             <option value="novel">Novel</option>
             <option value="story">Story</option>
             <option value="tale">Tale</option>

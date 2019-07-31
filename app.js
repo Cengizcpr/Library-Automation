@@ -4,7 +4,9 @@ const mongoose = require('mongoose');
 var express = require('express');
 var app=express();
 var bodyParser=require("body-parser");
- 
+
+
+//Mongo Connect
 mongoose.connect('mongodb://localhost:27017/Library'); 
 var db=mongoose.connection; 
 db.on('error', console.log.bind(console, "connection error")); 
@@ -27,12 +29,16 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
+
+
+
+ //Login Inquiry
 app.post('/login', function(req,res){ 
     mongoose.connect('mongodb://localhost:27017/Library', function(err, db) {
 
         db.collection('usersdata').findOne({ name: req.body.username}, function(err, user) {
             if(user ===null){
-               
+                
                 res.redirect('login');
                
            }
@@ -40,7 +46,7 @@ app.post('/login', function(req,res){
             return res.redirect('/library');
          } 
         else{
-          
+        
             res.redirect('/login');
         }
   });
@@ -48,6 +54,9 @@ app.post('/login', function(req,res){
 })
 })
 
+
+
+//Register Connect
 app.post('/register', function(req,res){ 
     var name = req.body.username; 
     var email =req.body.email; 
@@ -69,7 +78,7 @@ db.collection('usersdata').insertOne(data,function(err, collection){
     return res.redirect('/login'); 
 })
 
-app.get('/',function(req,res){ 
+app.get('/',function(req, res){ 
     res.set({ 
         'Access-control-Allow-Origin': '*'
         }); 
@@ -79,7 +88,8 @@ app.get('/',function(req,res){
 
 
 
-    
+
+    // AddBook
     app.post('/addbook', function(req,res){ 
         var bookname= req.body.book_name; 
         var author =req.body.author; 
@@ -93,7 +103,8 @@ app.get('/',function(req,res){
             "author":author, 
             "isbn":isbn, 
             "publisher":publisher,
-            "category":category
+            "category":category,
+            "zimmet":false
             //"phone":phone 
         } 
     db.collection('booksdata').insertOne(data,function(err, collection){ 
@@ -106,6 +117,30 @@ app.get('/',function(req,res){
     })
     
 
+
+//Searchbook
+    app.post('/searchbook', function(req, res){ 
+        
+        mongoose.connect('mongodb://localhost:27017/Library', function(err, db) {
+    
+            db.collection('booksdata').findOne({ bookname: req.body.book_name}, function(err, book) {
+                
+                if(book ===null){
+                    res.send({
+                        error: true, 
+                        message: "Kitap bulunamadı"
+                    })
+                } else if (book.bookname === req.body.book_name) {
+                
+                    res.send(book)
+                
+                } else {
+                    res.send(book)
+                    res.redirect('/login');
+                }
+            });
+        })
+    })
 
     var routeLogin=require('./app_server/routes/LoginRoute');
     var routeRegister=require('./app_server/routes/RegisterRoute');

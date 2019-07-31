@@ -43,6 +43,11 @@
     
               
         </style>
+        <script
+		src="https://code.jquery.com/jquery-3.4.1.min.js"
+		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
 </head>
 <body>  
         <div1 class=top-position>
@@ -56,17 +61,42 @@
         <div2 class="middle-position">SEARCH BOOK</div2><br/>
 
         <div3 class="bottom-position">
-        <form>
-                <p><b>Book Name: <input type="text" name="book_name"size="60" value="This field is requid"/></b></p><br/>
-                <p><b>Author:   &emsp;&emsp;&nbsp;<input type="text" name="author" size="60" value="This field is requied" maxlength="60"/></b></p><br/>
-                <p><b>ISBN:&emsp;&emsp;&nbsp;&nbsp;&nbsp; <input type="text" name="isbn" size="60" value="This field is requied" maxlength="13"/></b></p><br/>
-                <p><b>Publisher: <input type="text" name="publisher" size="60" value="This field is requied" maxlength="60"/></b></p><br/>
-                <input type="submit" class="btn btn-primary" value="Login">
+        <form action="/search" id="kitap">
+                <p><b>Book Name: <input type="text" name="book_name"size="60" placeholder="This field is requid"/></b></p><br/>
+                <p><b>Author:   &emsp;&emsp;&nbsp;<input type="text" name="author" size="60" placeholder="This field is requied" maxlength="60"/></b></p><br/>
+                <p><b>ISBN:&emsp;&emsp;&nbsp;&nbsp;&nbsp; <input type="text" name="isbn" size="60" placeholder="This field is requied" maxlength="13"/></b></p><br/>
+                <p><b>Publisher: <input type="text" name="publisher" size="60" placeholder="This field is requied" maxlength="60"/></b></p><br/>
+                <button class="btn btn-primary ara">Ara</button>
         </form>
-    </div3>
-       
         
-        <script src="app.js"></script>
+    </div3>
+    <div id="result"></div>
+       <script>
+       $( ".ara" ).click(function(event) {
+           event.preventDefault();
+
+           $.post( "/searchbook", $( "#kitap" ).serialize(), function( data ) {
+
+                $("#result").html("");
+                $( "#kitap")[0].reset();
+                if (data.error) {
+                    $(".ara").notify(data.message, "error");
+                } else {
+                    $("#result").append( "<strong>Kitap Adı: " + data.bookname + "</strong><br />" );
+                    $("#result").append( "<strong>Yazar: " + data.author + "</strong><br />" );
+                    $("#result").append( "<strong>Kategori: " + data.category + "</strong><br />" );
+                    $("#result").append( "<strong>ISBN: " + data.isbn + "</strong><br />" );
+                    $("#result").append( "<strong>Yayınevi: " + data.publisher + "</strong><br />" );
+                }
+                
+                
+                
+            });
+            
+        });
+       </script>
+        
+        
 </body>
 </html>
 
