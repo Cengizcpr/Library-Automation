@@ -119,28 +119,31 @@ app.get('/',function(req, res){
 
 
 //Searchbook
-    app.post('/searchbook', function(req, res){ 
+app.post('/searchbook', function(req, res){ 
         
-        mongoose.connect('mongodb://localhost:27017/Library', function(err, db) {
-    
-            db.collection('booksdata').findOne({ bookname: req.body.book_name}, function(err, book) {
-                
-                if(book ===null){
-                    res.send({
-                        error: true, 
-                        message: "Kitap bulunamadı"
-                    })
-                } else if (book.bookname === req.body.book_name) {
-                
-                    res.send(book)
-                
-                } else {
-                    res.send(book)
-                    res.redirect('/login');
-                }
-            });
-        })
+    mongoose.connect('mongodb://localhost:27017/Library', function(err, db) {
+
+       db.collection('booksdata').findOne({ bookname: req.body.book_name }, function(err, book,) {
+        
+            if(book ===null){
+                res.send({
+                    error: true, 
+                    message: "Kitap bulunamadı"
+                })
+            }
+            else if(book.bookname==req.body.book_name){
+                res.send(book);}
+            
+             
+            
+
+            else {
+                res.send(book)
+                res.redirect('/login');
+            }
+        });
     })
+})
 
     var routeLogin=require('./app_server/routes/LoginRoute');
     var routeRegister=require('./app_server/routes/RegisterRoute');

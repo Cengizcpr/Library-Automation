@@ -1,45 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+ <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+   
+
+
     <title>Document</title>
     <style>
-        .top-position{
-            position: absolute;
-           top:0px;
-            left:0px;
-            height: 200px;
-        }
-        .middle-position{
-            position: absolute;
-           top:200px;
-            left:40%;
-            width: 500px;
-            height: 300px;
-            font-size:50px;
-        }
-        .bottom-position{
-            position: relative;
-           top:300px;
-            left:35%;
-            width: 300px;
-            height: 300px;
-            font-size:25px;
-            
-
-        }
-            p1{float:left;
-                background-color:rgb(0, 0, 0);
-            padding:30px 152px;
-            border-style:inset;
-            color:white;
-            font-size: 15px;
-            
+        #menu {
+    list-style:none;
+    width:1400px;
+    margin:50px auto 0px auto;
+    height:72px;
+    padding:0px 50px 0px 50px;
+ 
+    /* Rounded Corners */
+     
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+ 
+    /* Background color and gradients */
+     
+    background: rgb(220,53,69);
+    background: -moz-linear-gradient(top, red, red);
+   
+     
+    /* Borders */
+     
+    border: 1px solid white;
     
-             }
-              
+    -moz-box-shadow:inset 0px 0px 1px #edf9ff;
+    -webkit-box-shadow:inset 0px 0px 1px #edf9ff;
+    box-shadow:inset 0px 0px 1px #edf9ff;
+}
+ 
+#menu li {
+    float:left;
+    display:block;
+    text-align:center;
+    
+    position:relative;
+    padding: 4px 10px 4px 10px;
+    margin-left:115px;
+    margin-top:15px;
+    border:none;
+}
+ 
+#menu li:hover {
+    border: 1px solid #FFFFFF;
+    padding: 4px 9px 4px 9px;
+     
+    /* Background color and gradients */
+     
+    background: #F4F4F4;
+    background: -moz-linear-gradient(top, #F4F4F4, #EEEEEE);
+     
+    /* Rounded corners */
+     
+    -moz-border-radius: 5px 5px 0px 0px;
+    -webkit-border-radius: 5px 5px 0px 0px;
+    border-radius: 5px 5px 0px 0px;
+}
+ 
+#menu li a {
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:20px; 
+    color: #EEEEEE;
+    display:block;
+    outline:0;
+    text-decoration:none;
+    text-shadow: 1px 1px 1px #000;
+}
+ 
+#menu li:hover a {
+    color:#161616;
+    text-shadow: 1px 1px 1px #FFFFFF;
+}
+#menu li .drop {
+    padding-right:21px;
+    background:url("img/drop.png") no-repeat right 8px;
+}
+#menu li:hover .drop {
+    background:url("img/drop.png") no-repeat right 7px;
+}
+        .container{
+
+           position: relative;
+            top:150px;           
+        }.container2{
+
+           position: relative;
+            top:50px;           
+        }
+           
+           
     
               
         </style>
@@ -50,43 +109,99 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
 </head>
 <body>  
-        <div1 class=top-position>
-            <a href="/library"><p1><b>Library</b></p1></a>
-            <a href="/library/addbook"><p1><b>Add Book</b></p1></a>
-            <a href="/library/searchbook"><p1><b>Search Book</b></p1></a>
-            <a href="/library/givebook"><p1><b>Give Book</b></p1></a>
-            <a href="/library/receivebook"><p1><b>Receive Book</b></p1></a>
-        </div1>
+       <ul id="menu">
+          <li>  <a href="/library">Library</a></li>
+         <li>    <a href="/library/addbook">Add Book</a></li> 
+          <li>   <a href="/library/searchbook">Search Book</a></li> 
+         <li>    <a href="/library/givebook">Give Book</a></li> 
+          <li>   <a href="/library/receivebook">Receive Book</a></li> 
+        </ul>
         
-        <div2 class="middle-position">SEARCH BOOK</div2><br/>
 
-        <div3 class="bottom-position">
-        <form action="/search" id="kitap">
-                <p><b>Book Name: <input type="text" name="book_name"size="60" placeholder="This field is requid"/></b></p><br/>
-                <p><b>Author:   &emsp;&emsp;&nbsp;<input type="text" name="author" size="60" placeholder="This field is requied" maxlength="60"/></b></p><br/>
-                <p><b>ISBN:&emsp;&emsp;&nbsp;&nbsp;&nbsp; <input type="text" name="isbn" size="60" placeholder="This field is requied" maxlength="13"/></b></p><br/>
-                <p><b>Publisher: <input type="text" name="publisher" size="60" placeholder="This field is requied" maxlength="60"/></b></p><br/>
-                <button class="btn btn-primary ara">Ara</button>
-        </form>
+       <div class="container">
+                                     
+        <div class="card row">
+            <div class="card-header">Search Book</div>
+            <div class="card-body">
+                    <form id = "kitap" action="/search">    
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <input required class="form-control" type="text" name="book_name" id = "book_name"  placeholder="Book Name:"  ><br>
+                            </div>
+                        </div>
+                        <button class="btn btn-danger ara" style="width:120px; margin-left:45%;">Search</button>
+                    </form>
+                  
+                    
+                
+             </div >
+             </div>
+   <div class="container2">
+                    <div class="card row">
+                    <div class="card-header" id = "tasks-title">Search Result</div>
+                    <div class="form-row">
+                            <div class="form-group col-md-6" >
+                              <table class="table table-hover"  style="width:1140px;" id="booktable" >
+                                <tbody  >
+                                <tr style="margin-left:100px;" >
+                                    <th style="padding:20px; margin-left:10px;">Book Name</th>
+                                    <th style="padding:20px; margin-left:10px;">Author</th>
+                                    <th style="padding:20px; margin-left:10px;">ISBN</th>
+                                    <th style="padding:20px; margin-left:10px;">Publisher</th>
+                                    <th style="padding:20px; margin-left:10px;">Category</th>
+                                    <th style="padding:20px; margin-left:10px;">Situation</th>
+                                </tr>
+                                
+                                
+                                <tr>
+                                    <th id="yazdir"></th>
+                                    <th id="yazdir2"></th>
+                                    <th id="yazdir3"></th>
+                                    <th id="yazdir4"></th>
+                                    <th id="yazdir5"></th>
+                                    <th id="yazdir6"></th>
+                                </tr></tbody>
+                                </table>
+                            </div>
+                    </div>
+
+                    
+                               
+                </div>
+              </div>
         
-    </div3>
-    <div id="result"></div>
+    </div>
        <script>
        $( ".ara" ).click(function(event) {
            event.preventDefault();
 
            $.post( "/searchbook", $( "#kitap" ).serialize(), function( data ) {
 
-                $("#result").html("");
+                $("#yazdir").html("");
+                $("#yazdir2").html("");
+                $("#yazdir3").html("");
+                $("#yazdir4").html("");
+                $("#yazdir5").html("");
+                $("#yazdir6").html("");
                 $( "#kitap")[0].reset();
+               
                 if (data.error) {
                     $(".ara").notify(data.message, "error");
                 } else {
-                    $("#result").append( "<strong>Kitap Adı: " + data.bookname + "</strong><br />" );
-                    $("#result").append( "<strong>Yazar: " + data.author + "</strong><br />" );
-                    $("#result").append( "<strong>Kategori: " + data.category + "</strong><br />" );
-                    $("#result").append( "<strong>ISBN: " + data.isbn + "</strong><br />" );
-                    $("#result").append( "<strong>Yayınevi: " + data.publisher + "</strong><br />" );
+                    $("#yazdir").append(data.bookname);
+                    $("#yazdir2").append(data.author);
+                    $("#yazdir3").append( data.isbn);
+                    $("#yazdir4").append(data.category);
+                    $("#yazdir5").append(data.publisher);
+                    if(data.zimmet==true)
+                    {
+                        $("#yazdir6").append("This Book is'not in Library.");
+                    }
+                   else
+                    {
+                        $("#yazdir6").append("This Book is in Library.");
+                    }
+                   
                 }
                 
                 
