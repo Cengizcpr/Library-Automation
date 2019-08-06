@@ -1,7 +1,34 @@
-var path=require('path');//her js dosyasında yeniden tanımlaman gerekir
-var express=require('express');
-var router=express.Router();
+var User = require('../models/user'); 
 
-module.exports.register=function(req,res){
-    res.sendFile(path.join(__dirname,'../../Register.html'));
-}
+module.exports.signupGet = function(req,res){
+
+    res.render('signup');
+};
+
+module.exports.signupPost = function(req,res){
+
+    console.log(req.body);
+
+    var newUser = new User({
+        name:req.body.name,
+        surname:req.body.surname,
+        username:req.body.username,
+        password:req.body.password,
+        email:req.body.email
+    });
+
+    newUser.save(function(err){
+        if(err){
+            res.send({
+                error: true, 
+                message: "Kullanıcı kayıtlı"
+            });
+        }else{
+            console.log('kullanıcı kaydedildi')
+           res.render('login');
+        }
+    });
+
+    
+        
+};

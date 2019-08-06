@@ -1,8 +1,20 @@
-var path=require('path');//her js dosyasında yeniden tanımlaman gerekir
-var express=require('express');
-var router=express.Router();
+var Book = require('../models/book'); 
 
-module.exports.searchbook=function(req,res){
-    res.sendFile(path.join(__dirname,'../../Searchbook.html'));
-}
+module.exports.searchbookGet=function(req,res){
+    res.render('searchbook');
+};
 
+module.exports.searchbookPost = function(req,res){
+    Book.findOne({ book_name:  req.body.book_name }, function(err, book) {
+        
+        if(book ===null){
+            res.send({
+                error: true, 
+                message: "Kitap bulunamadı"
+            })
+        }  else { 
+            res.send(book)
+           
+        }
+    });
+};

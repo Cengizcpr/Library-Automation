@@ -12,7 +12,7 @@
     <title>Document</title>
     <style>
         #menu {
-    list-style:none;
+            list-style:none;
     width:1400px;
     margin:50px auto 0px auto;
     height:72px;
@@ -77,18 +77,7 @@
     text-shadow: 1px 1px 1px #000;
 }
  
-#menu li:hover a {
-    color:#161616;
-    text-shadow: 1px 1px 1px #FFFFFF;
-}
-#menu li .drop {
-    padding-right:21px;
-    background:url("img/drop.png") no-repeat right 8px;
-}
-#menu li:hover .drop {
-    background:url("img/drop.png") no-repeat right 7px;
-}
-        .container{
+  .container{
 
            position: relative;
             top:150px;           
@@ -126,7 +115,7 @@
                     <form id = "kitap" action="/search">    
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <input required class="form-control" type="text" name="book_name" id = "book_name"  placeholder="Book Name:"  ><br>
+                                <input required class="form-control" type="text" name="book_name" id = "book_name"  placeholder="Book Name:" style=margin-left:50%;"  ><br>
                             </div>
                         </div>
                         <button class="btn btn-danger ara" style="width:120px; margin-left:45%;">Search</button>
@@ -195,11 +184,11 @@
                     $("#yazdir5").append(data.publisher);
                     if(data.zimmet==true)
                     {
-                        $("#yazdir6").append("This Book is'not in Library.");
+                        $("#yazdir6").append("This book is'not in Library.");
                     }
                    else
                     {
-                        $("#yazdir6").append("This Book is in Library.");
+                        $("#yazdir6").append("This book is in Library.");
                     }
                    
                 }
