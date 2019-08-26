@@ -1,0 +1,182 @@
+
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <meta http-equiv="X-UA-Compatible" content="ie=edge">
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+
+ <title>Document</title>
+ <style>
+     #menu {
+ list-style:none;
+ width:1400px;
+ margin:50px auto 0px auto;
+ height:72px;
+ padding:0px 50px 0px 50px;
+
+ /* Rounded Corners */
+  
+ -moz-border-radius: 10px;
+ -webkit-border-radius: 10px;
+ border-radius: 10px;
+
+ /* Background color and gradients */
+  
+ background: rgb(220,53,69);
+ background: -moz-linear-gradient(top, red, red);
+
+  
+ /* Borders */
+  
+ border: 1px solid white;
+ 
+ -moz-box-shadow:inset 0px 0px 1px #edf9ff;
+ -webkit-box-shadow:inset 0px 0px 1px #edf9ff;
+ box-shadow:inset 0px 0px 1px #edf9ff;
+}
+
+#menu li {
+ float:left;
+ display:block;
+ text-align:center;
+ 
+ position:relative;
+ padding: 4px 10px 4px 10px;
+ margin-left:115px;
+ margin-top:15px;
+ border:none;
+}
+
+#menu li:hover {
+ border: 1px solid #FFFFFF;
+ padding: 4px 9px 4px 9px;
+  
+ /* Background color and gradients */
+  
+ background: #F4F4F4;
+ background: -moz-linear-gradient(top, #F4F4F4, #EEEEEE);
+  
+ /* Rounded corners */
+  
+ -moz-border-radius: 5px 5px 0px 0px;
+ -webkit-border-radius: 5px 5px 0px 0px;
+ border-radius: 5px 5px 0px 0px;
+}
+
+#menu li a {
+ font-family:Arial, Helvetica, sans-serif;
+ font-size:20px; 
+ color: #EEEEEE;
+ display:block;
+ outline:0;
+ text-decoration:none;
+ text-shadow: 1px 1px 1px #000;
+}
+
+#menu li:hover a {
+ color:#161616;
+ text-shadow: 1px 1px 1px #FFFFFF;
+}
+#menu li .drop {
+ padding-right:21px;
+ background:url("img/drop.png") no-repeat right 8px;
+}
+#menu li:hover .drop {
+ background:url("img/drop.png") no-repeat right 7px;
+}
+     .container{
+
+        position: relative;
+         top:150px;           
+     }.container2{
+
+        position: relative;
+         top:50px;           
+     }
+        
+        
+ 
+           
+     </style>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"> crossorigin="anonymous"</script>
+
+  <ul id="menu">
+        <li>  <a href="/dashboard">Library</a></li>
+       <li>    <a href="/addbook">Add Book</a></li> 
+        <li>   <a href="/searchbook">Search Book</a></li> 
+       <li>    <a href="/givebook">Give Book</a></li> 
+        <li>   <a href="/receivebook">Receive Book</a></li> 
+      </ul>
+ 
+     
+     <% include ./partials/messages %>
+    <div class="container">
+                                  
+     <div class="card row">
+         <div class="card-header"><h3>Addbook Book</h3></div>
+         <div class="card-body" style="padding:5%">
+                 <form action='/addbook' method='post' id='books'>    
+                     <div class="form-row">
+                         <div class="form-group col-md-6">
+                             <input required class="form-control" type="text" name="bookname" placeholder="Book Name"  ><br>
+                             <input required class="form-control" type="text" name="author"   placeholder="Author"  style="margin-left:530px; margin-top:-61px"><br>
+                             <input required class="form-control" type="text" name="isbn" placeholder="Isbn"  ><br>
+                             <input required class="form-control" type="text" name="publisher" placeholder="Publisher" style="margin-left:530px; margin-top:-62px"><br>
+                             <select required class="form-control" name="category" placeholder="Category" style="margin-left:275px;" ><br>
+                             <option>Category</option>
+                             <option value="novel">Novel</option>
+                             <option value="story">Story</option>
+                             <option value="tale">Tale</option>
+                             <option value="encyclopedia">Encyclopedia</option>
+                             <option value="essay">Essay</option>
+                             <option value="poem">Poem</option>
+                             <option value="article">Article</option>
+                             <option value="history">History</option>
+                             <option value="philosophy">Philosophy</option>
+                         </div>
+                     </div>
+                     <input type="submit" class="btn btn-danger ekle" value="Save" name="Save" style="width:120px; margin-left:90%; margin-top:25px; ">
+                 </form>
+               
+                 
+             
+          </div >
+          </div>
+          <script>
+            $( ".ekle" ).click(function(event) {
+                event.preventDefault();
+     
+                $.post("/addbook", $( "#books" ).serialize(), function( data ) {
+                
+                    
+                     $( "#books")[0].reset();
+                    
+                     if (data.error) {
+                        
+                        $(".ekle").notify(data.message, "error");
+                    
+                     } else {
+                    
+                        $(".ekle").notify(data.message,"success");
+                      //  window.location.replace('/addbook');
+                        
+                        
+                     }
+                     
+                     
+                     
+                 });
+                 
+             });
+            </script>
+
+         
+
+  
+     
+     
+
+
