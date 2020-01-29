@@ -7,7 +7,7 @@
 
 
 
- <title>Document</title>
+ <title>DocumentSS</title>
  <style>
      #menu {
  list-style:none;
@@ -121,11 +121,11 @@
                  <form action='/addbook' method='post' id='books'>    
                      <div class="form-row">
                          <div class="form-group col-md-6">
-                             <input required class="form-control" type="text" name="bookname" placeholder="Book Name"  ><br>
-                             <input required class="form-control" type="text" name="author"   placeholder="Author"  style="margin-left:530px; margin-top:-61px"><br>
-                             <input required class="form-control" type="text" name="isbn" placeholder="Isbn"  ><br>
-                             <input required class="form-control" type="text" name="publisher" placeholder="Publisher" style="margin-left:530px; margin-top:-62px"><br>
-                             <select required class="form-control" name="category" placeholder="Category" style="margin-left:275px;" ><br>
+                             <input class="form-control" type="text" name="bookname" placeholder="Book Name" style="text-transform: uppercase;"  ><br>
+                             <input required class="form-control" type="text" name="author"   placeholder="Author"  style="text-transform: uppercase; margin-left:530px; margin-top:-61px"><br>
+                             <input required class="form-control" type="text" name="isbn" placeholder="Isbn" style="text-transform: uppercase;"  ><br>
+                             <input required class="form-control" type="text" name="publisher" placeholder="Publisher" style="text-transform: uppercase; margin-left:530px; margin-top:-62px"><br>
+                             <select required class="form-control" name="category" placeholder="Category" style="margin-left:275px; text-transform: uppercase;" ><br>
                              <option>Category</option>
                              <option value="novel">Novel</option>
                              <option value="story">Story</option>
@@ -138,7 +138,7 @@
                              <option value="philosophy">Philosophy</option>
                          </div>
                      </div>
-                     <input type="submit" class="btn btn-danger ekle" value="Save" name="Save" style="width:120px; margin-left:90%; margin-top:25px; ">
+                     <input type="submit" class="btn btn-danger ekle" value="Add" name="Save" style="width:120px; margin-left:90%; margin-top:25px; ">
                  </form>
                
                  
@@ -149,13 +149,15 @@
             $( ".ekle" ).click(function(event) {
                 event.preventDefault();
      
-                $.post("/addbook", $( "#books" ).serialize(), function( data ) {
+                $.post("/addbook", $( "#books" ).serialize(), function( data,data2 ) {
                 
                     
                      $( "#books")[0].reset();
                     
                      if (data.error) {
-                        
+                        if(data2.error){
+                              $(".ekle").notify(data.message, "error");
+                       }
                         $(".ekle").notify(data.message, "error");
                     
                      } else {

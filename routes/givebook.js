@@ -10,12 +10,21 @@ router.get('/givebook', ensureAuthenticated, (req, res) =>
   })
 );
 router.post('/givebook', (req, res) => {
+    const { student_name, student_surname, isbn, student_number } = req.body;
+
+    if (!student_name || !student_surname  || !isbn || !student_number) {
+        res.send({
+          error: true, 
+          message: "Please enter all fields"})
+      }else{
+
+
     Book.findOne({ isbn: req.body.isbn }, function(err, book) {
         
         if(book ===null){
             res.send({
                 error: true, 
-                message: "Bu kitap kütüphanede değil"
+                message: "This book is not in library"
             });
 
 
@@ -24,11 +33,21 @@ router.post('/givebook', (req, res) => {
             if(book.zimmet==true){
                 res.send({
                     error: true, 
-                    message: "Bu kitap başkasında"
+                    message: "This book is now in someone else's hands."
                 });
             } else{
+                Zimmet.findOne({student_number: req.body.student_number}, function(err, book){
+                    if(book!=null)
+                    {
+                        res.send({
+                            error: true, 
+                            message: "This student can only take one book."
+                        });
+                    }
+                
             
-
+            else{
+            
                     var newZimmet = new Zimmet({
                         student_name:req.body.student_name,
                         student_surname:req.body.student_surname,
@@ -36,36 +55,40 @@ router.post('/givebook', (req, res) => {
                         student_number:req.body.student_number,
                         zimmet:true
                     });
+                  
 
                     
                    
                     newZimmet.save(function(err){
-                        
-
-                            Book.findOneAndUpdate({zimmet:false},{zimmet:true},function(err)
+                      
+                           
+                            Book.findOneAndUpdate({zimmet:false,isbn:req.body.isbn},{zimmet:true},function(err)
                             {
                                 if(err){}
                                 else{
                                 res.send({
                                     error: false, 
-                                    message: "Bu kitap sizde"
+                                    message: "This book was entrusted"
                                 });
                             }
 
 
                         
                         })
-                            
+                    
+                    
                           
                         
                     });
                 }
-
+                });
+                }
+                
 
 
             }
                 
             });      
                 
-
+        }
 });module.exports = router;

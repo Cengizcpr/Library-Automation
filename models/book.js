@@ -3,23 +3,28 @@ const mongoose = require('mongoose');
 const BookSchema = new mongoose.Schema({
   bookname: {
     type: String,
-    required: true
+    required: true,
+    uppercase:true
   },
   author: {
     type: String,
-    required: true
+    required: true,
+    uppercase:true
   },
   isbn: {
     type: String,
-    required: true
+    required: true,
+    uppercase:true
   },
   publisher: {
     type: String,
-    required: true
+    required: true,
+    uppercase:true
   },
     category: {
     type: String,
-    required: true
+    required: true,
+    uppercase:true
   },
   zimmet: {
     type: Boolean

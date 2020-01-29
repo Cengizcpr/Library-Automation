@@ -120,10 +120,10 @@
                 <form id = "kitap" action="/searchbook" method="POST">    
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <input required class="form-control" type="text" name="bookname" id = "bookname"  placeholder="Book Name:" style=margin-left:50%;"  ><br>
+                            <input required class="form-control" type="text" name="bookname" id = "bookname"  placeholder="Book Name:" style="margin-left:50%; text-transform: uppercase;"  ><br>
                         </div>
                     </div>
-                    <button class="btn btn-danger ara" style="width:120px; margin-left:45%;">Search</button>
+                    <button class="btn btn-danger ara" style="width:120px; margin-left:45%; ">Search</button>
                 </form>
               
                 
@@ -155,6 +155,7 @@
                                 <th id="yazdir5"></th>
                                 <th id="yazdir6"></th>
                             </tr>
+
                         
                             
                         
@@ -188,7 +189,6 @@
                         $("#yazdir4").html("");
                         $("#yazdir5").html("");
                         $("#yazdir6").html("");
-                        $( "#kitap")[0].reset();
                     
            
                 if (data.error) {
@@ -199,12 +199,13 @@
                         $("#yazdir").append(data.bookname);
                         $("#yazdir2").append(data.author);
                         $("#yazdir3").append( data.isbn);
-                        $("#yazdir4").append(data.category);
-                        $("#yazdir5").append(data.publisher);
+                        $("#yazdir4").append(data.publisher);
+                        $("#yazdir5").append(data.category);
+                     
                         
                          if(data.zimmet==true)
                          {
-                             $("#yazdir6").append("This book is'not in Library.");
+                             $("#yazdir6").append("This book is not in Library.");
                          }
                          else
                          {

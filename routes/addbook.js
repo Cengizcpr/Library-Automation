@@ -12,12 +12,17 @@ router.get('/addbook', ensureAuthenticated, (req, res) =>
 router.post('/addbook', (req, res) => {
     const { bookname, author, isbn, publisher,category } = req.body;
     let errors = [];
+
   
-   
+    if (!bookname || !author  || !isbn || !publisher) {
+      res.send({
+        error: true, 
+        message: "Please enter all fields"})
+    }
   
   
     if (errors.length > 0) {
-      res.render('addbook', {
+     res.render('addbook', {
         errors,
         bookname,
         author,
@@ -25,6 +30,9 @@ router.post('/addbook', (req, res) => {
         publisher,
         category
       });
+     
+
+
     } else {
       Book.findOne({ isbn: isbn }).then(book => {
         if (book) {
@@ -68,7 +76,7 @@ router.post('/addbook', (req, res) => {
         }
       });
     }
-
+    
 })
 
 

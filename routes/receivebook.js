@@ -10,13 +10,21 @@ router.get('/receivebook', ensureAuthenticated, (req, res) =>
   })
 );
 router.post('/receivebook', (req, res) => {
+    const { isbn, student_number } = req.body;
+
+    if (!isbn || !student_number) {
+        res.send({
+          error: true, 
+          message: "Please enter all fields"})
+      }else{
+
     Zimmet.findOne({ student_number: req.body.student_number }, function(err, book) {
 
         if(book==null)
         {
             res.send({
                 error: true, 
-                message: "Böyle bir öğrenci yok"
+                message: "This student is not registered"
             });
         }
         else{
@@ -25,7 +33,7 @@ router.post('/receivebook', (req, res) => {
         if(book === null){
             res.send({
                 error: true, 
-                message: "Bu kitap kütüphanede değil"
+                message: "Book not found"
             });
 
 
@@ -45,7 +53,7 @@ router.post('/receivebook', (req, res) => {
                     else{
                     res.send({
                         error: false, 
-                        message: "Bu kitap silindi"
+                        message: "This book has been received"
                     });
                 }
             
@@ -59,7 +67,7 @@ router.post('/receivebook', (req, res) => {
             } else{
                 res.send({
                     error: true, 
-                    message: "Bu kitap kimsede değil"
+                    message: "This book has not been entrusted to anyone."
                 });
 
             }
@@ -71,5 +79,5 @@ router.post('/receivebook', (req, res) => {
         }
                 
         }); 
-
+    }
 });module.exports = router;

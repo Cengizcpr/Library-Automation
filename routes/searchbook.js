@@ -9,12 +9,21 @@ router.get('/searchbook', ensureAuthenticated, (req, res) =>
   })
 );
 router.post('/searchbook', (req, res) => {
+  const { bookname } = req.body;
+  let errors = [];
+
+  if (!bookname) {
+    res.send({
+      error: true, 
+      message: "Please enter all fields"})
+  }else{
+  
 Book.findOne({ bookname:  req.body.bookname }, function(err, book) {
         
         if(book ===null){
             res.send({
                 error: true, 
-                message: "Kitap bulunamadı"
+                message: "Book not found"
             })
         }  else { 
           res.send(book);
@@ -22,5 +31,5 @@ Book.findOne({ bookname:  req.body.bookname }, function(err, book) {
            
         }
     });
-
+  }
 });module.exports = router;
